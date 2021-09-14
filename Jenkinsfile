@@ -11,5 +11,12 @@ pipeline {
         }
       }
     }
+    stage('grype') {
+      steps {
+        withEnv(HERMIT_ENV_VARS.split('\n').toList()) {
+          sh 'grype alpine:3.10.9 --scope AllLayers'
+        }
+      }
+    }
   }
 }
